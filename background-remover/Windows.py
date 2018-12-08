@@ -6,9 +6,10 @@ This is a temporary script file.
 """
 from tkinter import *
 from tkinter import messagebox
-
+import tkinter as tk
 import numpy as np
-import PIL
+import cv2 
+from PIL import Image, ImageTk
 import hashlib
 import time
 
@@ -21,36 +22,84 @@ class MY_GUI():
     #設置窗口
     def set_init_window(self):
         self.init_window_name.title("Bakground Remover")           #窗口名
-        self.init_window_name.geometry('800x500')
+        self.init_window_name.geometry('700x200')
         self.init_window_name.resizable(width=False,height=False)   # 固定长宽不可拉伸
 
         #標籤
         self.init_path_label = Label(self.init_window_name, text="圖片路徑 : ",  height= 5)
         self.init_path_label.place(x=20,  y=10,anchor='nw')
-        
-        self.init_original_image_label = Label(self.init_window_name, text="原圖", width=3)
-        self.init_original_image_label.place(x=100,  y=120,anchor='nw')
 
         # #文本框
         self.init_path_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
         self.init_path_Text.place(x=100,  y=42,anchor='nw')
 
-        # #按鈕
-        self.original_image_button = Button(self.init_window_name, text="顯示原圖", bg="lightblue", width=10, command=self.str_trans_to_md5)  # 調用內部方法  加()為直接調用
+        # Display Button
+        self.original_image_button = Button(self.init_window_name, text="顯示原圖", bg="lightblue", width=10, command=self.ori_img_display)  # 調用內部方法  加()為直接調用
         self.original_image_button.place(x=20,  y=80,anchor='nw')
 
-    #功能函數
-    def str_trans_to_md5(self):
-        src = self.init_path_Text.get(1.0,END)
+        self.filter_button = Button(self.init_window_name, text="過濾", bg="lightblue", width=10, command=self.filter_img_display)  # 調用內部方法  加()為直接調用
+        self.filter_button.place(x=110,  y=80,anchor='nw')
 
+        self.remove_background_button = Button(self.init_window_name, text="去背", bg="lightblue", width=10, command=self.remove_background_display)  # 調用內部方法  加()為直接調用
+        self.remove_background_button.place(x=200,  y=80,anchor='nw')
+ 
+        # Save Button
+        self.save_ori_button = Button(self.init_window_name, text="存取原圖", bg="lightblue", width=10, command=self.ori_img_display)  # 調用內部方法  加()為直接調用
+        self.save_ori_button.place(x=20,  y=120,anchor='nw')
+
+        self.save_fil_button = Button(self.init_window_name, text="存取過濾圖片", bg="lightblue", width=10, command=self.filter_img_display)  # 調用內部方法  加()為直接調用
+        self.save_fil_button.place(x=110,  y=120,anchor='nw')
+
+        self.save_remove_background_button = Button(self.init_window_name, text="存取去背圖片", bg="lightblue", width=10, command=self.remove_background_display)  # 調用內部方法  加()為直接調用
+        self.save_remove_background_button.place(x=200,  y=120,anchor='nw')
+
+    def ori_img_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
         try:
-            im=PIL.Image.open("message.jpg")
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
         except:
-            messagebox.showerror("Error", "Please Enter a certain path.")
-                
-        # #原圖顯示
-        self.Image_Label = Label(self.init_window_name)
-        self.Image_Label.place(x=100,  y=350,anchor='nw')
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def filter_img_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def remove_background_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def ori_img_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def filter_img_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def remove_background_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
 
 
 def gui_start():
@@ -60,5 +109,6 @@ def gui_start():
     init_window.mainloop()         
 
 if __name__ == '__main__':
+
     gui_start()
 
