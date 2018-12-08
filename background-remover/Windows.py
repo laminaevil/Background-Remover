@@ -26,56 +26,38 @@ class MY_GUI():
         self.init_window_name.resizable(width=False,height=False)   # 固定长宽不可拉伸
 
         #標籤
-        self.init_path_label = Label(self.init_window_name, text="圖片路徑 : ",  height= 5)
+        self.init_path_label = Label(self.init_window_name, text="圖片路徑 : ",  height= 2)
         self.init_path_label.place(x=20,  y=10,anchor='nw')
+
+        self.save_path_label = Label(self.init_window_name, text="圖片存取路徑 : ",  height= 2)
+        self.save_path_label.place(x=20,  y=50,anchor='nw')
 
         # #文本框
         self.init_path_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
-        self.init_path_Text.place(x=100,  y=42,anchor='nw')
+        self.init_path_Text.place(x=100,  y=18,anchor='nw')
+
+        self.init_path_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
+        self.init_path_Text.place(x=110,  y=58,anchor='nw')
 
         # Display Button
         self.original_image_button = Button(self.init_window_name, text="顯示原圖", bg="lightblue", width=10, command=self.ori_img_display)  # 調用內部方法  加()為直接調用
-        self.original_image_button.place(x=20,  y=80,anchor='nw')
+        self.original_image_button.place(x=20,  y=100,anchor='nw')
 
         self.filter_button = Button(self.init_window_name, text="過濾", bg="lightblue", width=10, command=self.filter_img_display)  # 調用內部方法  加()為直接調用
-        self.filter_button.place(x=110,  y=80,anchor='nw')
+        self.filter_button.place(x=110,  y=100,anchor='nw')
 
         self.remove_background_button = Button(self.init_window_name, text="去背", bg="lightblue", width=10, command=self.remove_background_display)  # 調用內部方法  加()為直接調用
-        self.remove_background_button.place(x=200,  y=80,anchor='nw')
+        self.remove_background_button.place(x=200,  y=100,anchor='nw')
  
         # Save Button
-        self.save_ori_button = Button(self.init_window_name, text="存取原圖", bg="lightblue", width=10, command=self.ori_img_display)  # 調用內部方法  加()為直接調用
-        self.save_ori_button.place(x=20,  y=120,anchor='nw')
+        self.save_ori_button = Button(self.init_window_name, text="存取原圖", bg="lightblue", width=10, command=self.ori_img_save)  # 調用內部方法  加()為直接調用
+        self.save_ori_button.place(x=20,  y=140,anchor='nw')
 
-        self.save_fil_button = Button(self.init_window_name, text="存取過濾圖片", bg="lightblue", width=10, command=self.filter_img_display)  # 調用內部方法  加()為直接調用
-        self.save_fil_button.place(x=110,  y=120,anchor='nw')
+        self.save_fil_button = Button(self.init_window_name, text="存取過濾圖片", bg="lightblue", width=10, command=self.filter_img_save)  # 調用內部方法  加()為直接調用
+        self.save_fil_button.place(x=110,  y=140,anchor='nw')
 
-        self.save_remove_background_button = Button(self.init_window_name, text="存取去背圖片", bg="lightblue", width=10, command=self.remove_background_display)  # 調用內部方法  加()為直接調用
-        self.save_remove_background_button.place(x=200,  y=120,anchor='nw')
-
-    def ori_img_display(self):
-        src = self.init_path_Text.get(1.0,END).replace("\n", "")
-        try:
-            original_image = cv2.imread(src)
-            cv2.imshow("Original image", original_image)
-        except:
-            messagebox.showerror("Error", "Please, Enter the right path.")
-
-    def filter_img_display(self):
-        src = self.init_path_Text.get(1.0,END).replace("\n", "")
-        try:
-            original_image = cv2.imread(src)
-            cv2.imshow("Original image", original_image)
-        except:
-            messagebox.showerror("Error", "Please, Enter the right path.")
-
-    def remove_background_display(self):
-        src = self.init_path_Text.get(1.0,END).replace("\n", "")
-        try:
-            original_image = cv2.imread(src)
-            cv2.imshow("Original image", original_image)
-        except:
-            messagebox.showerror("Error", "Please, Enter the right path.")
+        self.save_remove_background_button = Button(self.init_window_name, text="存取去背圖片", bg="lightblue", width=10, command=self.remove_background_save)  # 調用內部方法  加()為直接調用
+        self.save_remove_background_button.place(x=200,  y=140,anchor='nw')
 
     def ori_img_display(self):
         src = self.init_path_Text.get(1.0,END).replace("\n", "")
@@ -94,6 +76,30 @@ class MY_GUI():
             messagebox.showerror("Error", "Please, Enter the right path.")
 
     def remove_background_display(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def ori_img_save(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imwrite("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def filter_img_save(self):
+        src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        try:
+            original_image = cv2.imread(src)
+            cv2.imshow("Original image", original_image)
+        except:
+            messagebox.showerror("Error", "Please, Enter the right path.")
+
+    def remove_background_save(self):
         src = self.init_path_Text.get(1.0,END).replace("\n", "")
         try:
             original_image = cv2.imread(src)
