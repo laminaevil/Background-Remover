@@ -36,8 +36,8 @@ class MY_GUI():
         self.init_path_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
         self.init_path_Text.place(x=100,  y=18,anchor='nw')
 
-        self.init_path_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
-        self.init_path_Text.place(x=110,  y=58,anchor='nw')
+        self.init_save_Text = Text(self.init_window_name, width=80, height=1)  #原始數據錄入框
+        self.init_save_Text.place(x=110,  y=58,anchor='nw')
 
         # Display Button
         self.original_image_button = Button(self.init_window_name, text="顯示原圖", bg="lightblue", width=10, command=self.ori_img_display)  # 調用內部方法  加()為直接調用
@@ -61,6 +61,7 @@ class MY_GUI():
 
     def ori_img_display(self):
         src = self.init_path_Text.get(1.0,END).replace("\n", "")
+        print(src)
         try:
             original_image = cv2.imread(src)
             cv2.imshow("Original image", original_image)
