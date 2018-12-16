@@ -10,12 +10,15 @@ def unet(input_size = (256,256,3)):
     conv1 = Conv2D(64, (3,3), activation = 'relu')(inputs)
     conv1 = Conv2D(64, 3, activation = 'relu')(conv1)
     pool1 = MaxPooling2D(pool_size=(2, 2))(conv1)
+
     conv2 = Conv2D(128, 3, activation = 'relu')(pool1)
     conv2 = Conv2D(128, 3, activation = 'relu')(conv2)
     pool2 = MaxPooling2D(pool_size=(2, 2))(conv2)
+    
     conv3 = Conv2D(256, 3, activation = 'relu')(pool2)
     conv3 = Conv2D(256, 3, activation = 'relu')(conv3)
     pool3 = MaxPooling2D(pool_size=(2, 2))(conv3)
+    
     conv4 = Conv2D(512, 3, activation = 'relu')(pool3)
     conv4 = Conv2D(512, 3, activation = 'relu')(conv4)
     drop4 = Dropout(0.5)(conv4)
