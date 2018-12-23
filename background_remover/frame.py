@@ -17,7 +17,7 @@ import time
 
 import cv2 
 
-model = load_model('models/test.h5', compile=False)
+model = load_model('training_phase/models/test.h5', compile=False)
 
 class MY_GUI():
     def __init__(self,init_window_name):
