@@ -34,8 +34,8 @@ def loadDatas(direction):
 
 def validation(model):
         # load data
-        X_test = loadDatas('test1/test data').astype(np.float32)
-        Y_test = loadDatas('test1/gt').astype(np.float32)
+        X_test = loadDatas('test/test data').astype(np.float32)
+        Y_test = loadDatas('test/gt').astype(np.float32)
 
         # predict mask Y_hat
         cv2.normalize(X_test,  X_test, 0, 1, cv2.NORM_MINMAX)
@@ -69,7 +69,7 @@ def validation(model):
                         plt.tight_layout(h_pad=0.1, w_pad=0.1)
                         plt.show()
                         
-                        fig.savefig("test1/filter_data/test_result_NO "+str(i + 1)+" .png")
+                        fig.savefig("test/filter_data/test_result_NO "+str(i + 1)+" .png")
                 
         # show result
         ShowImageWithGT(X_test, Y_hat, dst, Y_test)
