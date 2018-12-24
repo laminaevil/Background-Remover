@@ -5,7 +5,7 @@ from PIL import Image, ImageTk
 
 from tkinter.filedialog import askdirectory
 from Transparent import transparent
-from extra import extra_validations
+from extra_test import extra_test
 from test import test
 
 import tkinter as tk

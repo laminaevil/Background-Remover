@@ -31,7 +31,7 @@ def loadDatas(direction):
             imageList.append(img)
     return np.array(imageList)
 
-def extra_validations(model, exdirection):
+def extra_test(model, exdirection):
         # load data
         X_test = loadDatas(str(exdirection)).astype(np.float32)
 
