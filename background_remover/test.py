@@ -1,13 +1,21 @@
-from keras.models import load_model
+# inner lib
 import os
-import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('Agg') # don't show image
+
 from time import time
-np.set_printoptions(suppress=True)
+
+# outter lib
+import cv2
+
+from keras.models import load_model
+
+# self lib
 from evaluate import *
+
+matplotlib.use('Agg') # don't show image
+np.set_printoptions(suppress=True)
 
 
 def loadDatas(direction):
@@ -32,7 +40,7 @@ def loadDatas(direction):
             imageList.append(img)
     return np.array(imageList)
 
-def validation(model):
+def test(model):
         # load data
         X_test = loadDatas('test/test data').astype(np.float32)
         Y_test = loadDatas('test/gt').astype(np.float32)

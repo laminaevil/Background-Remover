@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 from tkinter.filedialog import askdirectory
 from Transparent import transparent
 from extra import extra_validations
-from Validation import validation
+from test import test
 
 import tkinter as tk
 import tkinter.filedialog
@@ -15,7 +15,7 @@ import numpy as np
 import hashlib
 import time
 
-import cv2 
+import cv2
 
 model = load_model('training_phase/models/test.h5', compile=False)
 
@@ -88,7 +88,7 @@ class MY_GUI():
     def ground_filter_img_display(self):
         src = self.init_path_Text.cget("text")
         try:
-            precision, recall, meassure, MAE, image_predict, average_exe_time=validation(model)
+            precision, recall, meassure, MAE, image_predict, average_exe_time=test(model)
             self.precision_Text.config(text = str(precision))
             self.recall_Text.config(text = str(recall))
             self.meassure_Text.config(text = str(meassure))

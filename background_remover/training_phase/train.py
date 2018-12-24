@@ -30,7 +30,10 @@ def loadData(dataname = ' '):
     dataset = h5py.File(dataname, 'r')
     X_pre = dataset['X_pre'][:]
     Y_pre = dataset['Y_pre'][:]
+    
+    # if we don't close the dataset, it will happen the crash.
     dataset.close()
+
     # normalization
     X_pre = X_pre.astype('float32')
     cv2.normalize(X_pre, X_pre,0, 1, cv2.NORM_MINMAX)
@@ -38,9 +41,11 @@ def loadData(dataname = ' '):
     cv2.normalize(Y_pre,  Y_pre ,0, 1, cv2.NORM_MINMAX)
     return X_pre, Y_pre
 
+#  we can get two variant to save
 X_load, Y_load = loadData('training_dataset_gray.h5')
 print (X_load.shape, Y_load.shape)
 
+# Show image
 Y_show = np.append(Y_load, Y_load, axis = 3)
 Y_show = np.append(Y_show, Y_load, axis = 3)
 
@@ -53,6 +58,8 @@ for i in range(axarr.shape[0]):
 plt.tight_layout(h_pad=0.1, w_pad=0.1)
 plt.show()
 
+# We can get the small data to overfiting.
+# To get over fitting more easy by 20 datas.
 X_train = X_load#[0:20]
 Y_train = Y_load#[0:20]
 print (Y_train.shape)
@@ -72,9 +79,15 @@ for i in range(axarr.shape[0]):
 
 plt.tight_layout(h_pad=0.1, w_pad=0.1)
 plt.show()
+
+# to design a neural network, we always learning rate 3e-4
 model = unet(num_classes=1, learning_rate = 3e-4)
 model.summary()
+
+# if the validation loss descend, it will save a new model.h5
 model_checkpoint = [ModelCheckpoint('callback_model.h5',verbose=1, monitor='val_loss',  mode='auto',save_best_only=True)]
+
+# To draw the figure of the training stage
 history = model.fit(x = X_train, y = Y_train, batch_size = 5, callbacks = model_checkpoint,epochs=5, verbose=1, validation_split=0.0, validation_data=(X_dev, Y_dev), shuffle=True, steps_per_epoch=None, validation_steps=None)
 model.save('test.h5')
 
