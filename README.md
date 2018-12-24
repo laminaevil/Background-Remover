@@ -2,10 +2,15 @@
 
 We use the Unet to remove the Human-Background.
 
+## Results we do
+
+We just waste least 1 second to do any images removing background.
+
+We train each model in 30~60 mins.
+
 ## Getting Started
 
 First, You have give the data to the dataprepare and do the train.....
-
 
 ### Prerequisites
 
@@ -24,6 +29,7 @@ keras
 ``` 
 pip install tensorflow
 pip install keras
+pip install opencv-python
 ```
 
 #### For GPU Version
@@ -49,7 +55,7 @@ Explain what these tests test and why
 Give an example
 ```
 
-### Validation phase
+### test phase
 
 Explain what these tests test and why
 
